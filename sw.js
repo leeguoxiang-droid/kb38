@@ -1,5 +1,5 @@
 // 离线缓存：改了 app.js / app.css 就把版本号加一
-const CACHE = 'kb38-v7';
+const CACHE = 'kb38-v8';
 const FILES = ['./', './index.html', './app.js', './app.css', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
@@ -14,11 +14,11 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// 先上网拿最新版，没网才用缓存
+// 先上网拿最新版（no-cache：每次向伺服器核对，不吃浏览器旧缓存），没网才用缓存
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET' || !e.request.url.startsWith(self.location.origin)) return;
   e.respondWith(
-    fetch(e.request)
+    fetch(e.request, { cache: 'no-cache' })
       .then((res) => {
         const copy = res.clone();
         caches.open(CACHE).then((c) => c.put(e.request, copy));
