@@ -1,5 +1,5 @@
 // 离线缓存：改了 app.js / app.css 就把版本号加一
-const CACHE = 'kb38-v6';
+const CACHE = 'kb38-v7';
 const FILES = ['./', './index.html', './app.js', './app.css', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {
